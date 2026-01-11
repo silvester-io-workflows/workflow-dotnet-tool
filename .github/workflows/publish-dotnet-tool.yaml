@@ -191,9 +191,11 @@ jobs:
           echo "context=$context" >> "$GITHUB_OUTPUT"
 
       - name: Set up Docker Buildx
+        if: startsWith(github.ref, 'refs/tags/')
         uses: docker/setup-buildx-action@v3
 
       - name: Log in to registry
+        if: startsWith(github.ref, 'refs/tags/')
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
@@ -201,6 +203,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Docker metadata (tags, labels)
+        if: startsWith(github.ref, 'refs/tags/')
         id: metadata
         uses: docker/metadata-action@v5
         with:
@@ -214,6 +217,7 @@ jobs:
             org.opencontainers.image.revision=${{ github.sha }}
 
       - name: Build and push container image
+        if: startsWith(github.ref, 'refs/tags/')
         uses: docker/build-push-action@v6
         with:
           context: ${{ steps.paths.outputs.context }}
