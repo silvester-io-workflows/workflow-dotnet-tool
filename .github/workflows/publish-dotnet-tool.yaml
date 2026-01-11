@@ -12,6 +12,10 @@ on:
         required: false
         default: ""
         type: string
+      runsettings_path:
+        description: Path to the .runsettings file used during tests.
+        required: true
+        type: string
       configuration:
         description: Build configuration used for packing/publishing.
         required: false
@@ -126,7 +130,7 @@ jobs:
         run: dotnet restore "${{ inputs.solution_path || inputs.tool_project }}" --configfile ./nuget.config
 
       - name: Test
-        run: dotnet test "${{ inputs.solution_path }}" --configuration "${{ inputs.configuration }}"
+        run: dotnet test "${{ inputs.solution_path }}" --configuration "${{ inputs.configuration }}" --settings "${{ inputs.runsettings_path }}"
 
       - name: Pack tool
         if: startsWith(github.ref, 'refs/tags/')

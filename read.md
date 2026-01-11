@@ -22,7 +22,8 @@ jobs:
     uses: silvester-io-workflows/workflow-dotnet-tool/.github/workflows/publish-dotnet-tool.yaml@v1
     with:
       tool_project: ./source/Assemblies/Youtubarr.Hosts.Cli/Youtubarr.Hosts.Cli.csproj
-      solution_path: ./source/Youtubarr.sln
+      solution_path: ./source/Youtubarr.slnx
+      runsettings_path: ./source/Tests/Tests.Integration.Hosts.Cli/.runsettings.ci
       dockerfile: ./source/Assemblies/Youtubarr.Hosts.Cli/containerfile
       context: .
       platforms: linux/amd64
@@ -36,6 +37,7 @@ jobs:
 ### Inputs
 - `tool_project` (required): Path to the .NET tool `.csproj`.
 - `solution_path` (optional): Path to the solution to restore/test.
+- `runsettings_path` (required): Path to the `.runsettings` file used during tests.
 - `configuration` (optional): Build configuration. Defaults to `Release`.
 - `dotnet_version` (optional): .NET SDK version. Defaults to `10.0.x`.
 - `package_source` (optional): NuGet source to push to. Defaults to the caller's GitHub Packages feed.
