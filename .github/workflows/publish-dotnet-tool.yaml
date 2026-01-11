@@ -169,7 +169,6 @@ jobs:
             --runtime "${{ inputs.publish_runtime }}" \
             --self-contained "${{ inputs.self_contained }}" \
             --output "${{ env.PUBLISH_OUTPUT }}" \
-            --no-restore \
             /p:UseAppHost=${{ inputs.use_app_host }} \
             /p:ContinuousIntegrationBuild=true
 
