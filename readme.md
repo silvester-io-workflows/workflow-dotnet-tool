@@ -27,7 +27,9 @@ jobs:
       dockerfile: ./source/Assemblies/Youtubarr.Hosts.Cli/containerfile
       context: .
       platforms: linux/amd64
-    secrets: inherit
+    secrets:
+      NUGET_RESTORE_TOKEN: ${{ secrets.NUGET_RESTORE_TOKEN }}
+      NUGET_RESTORE_USERNAME: ${{ secrets.NUGET_RESTORE_USERNAME }}
 ```
 
 ### Notes
@@ -52,3 +54,7 @@ jobs:
 - `context` (optional): Container build context. Defaults to the repository root.
 - `dockerfile` (optional): Path to the containerfile. Defaults to `containerfile` next to the tool project.
 - `platforms` (optional): Target platforms. Defaults to `linux/amd64`.
+
+### Secrets
+- `REGISTRY_TOKEN` (optional): Token used to authenticate to the container registry for pulling base images and pushing the result. Use a PAT with `read:packages` on the source org and `write:packages` on the target org when pulling private GHCR images.
+- `REGISTRY_USERNAME` (optional): Username for registry auth. Defaults to the GitHub actor.
